@@ -1,0 +1,7 @@
+[ .[] | map( { (.id) : [.threads[] | .output ]}  ) | add ]
+{ "api":  .route.apis[] | select(.id == "1") | . | to_entries[] | select(.key=="req") | [.] | from_entries }
+
+join 2 arrays to key value pairs
+
+.| transpose | reduce .[] as $pair ( {}; . + { ($pair[0]): $pair[1]})
+
